@@ -23,7 +23,7 @@ const (
 	GB = 1024 * MB
 )
 
-//获取相差时间
+// 获取相差时间
 func GetHourDiffer(startTime, endTime string) int64 {
 	var hour int64
 	t1, err := time.ParseInLocation("2006-01-02 15:04:05", startTime, time.Local)
@@ -44,6 +44,7 @@ func GetHourDiffer(startTime, endTime string) int64 {
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /server-monitor [get]
 // @Security Bearer
+
 func ServerInfo(c *gin.Context) {
 	sysInfo, err := host.Info()
 	osDic := make(map[string]interface{}, 0)
@@ -103,13 +104,13 @@ func ServerInfo(c *gin.Context) {
 		appVersion = "dev"
 	}
 	data := map[string]interface{}{
-		"requestId": utils.GenerateMsgIDFromContext(c),
-		"code":      200,
-		"os":        osDic,
-		"mem":       memDic,
-		"cpu":       cpuDic,
-		"disk":      diskDic,
-		"diskList":  disklist,
+		"requestId":  utils.GenerateMsgIDFromContext(c),
+		"code":       200,
+		"os":         osDic,
+		"mem":        memDic,
+		"cpu":        cpuDic,
+		"disk":       diskDic,
+		"diskList":   disklist,
 		"appVersion": appVersion,
 	}
 	c.Set("result", data)

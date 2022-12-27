@@ -25,19 +25,19 @@ import (
 const DownloadUrlPrefix = "/public/downloadFile/"
 
 var (
-	failedInitFilePath = cerr.New(4500, "初始化路径失败", "failed to initialize upload path")
-	failedSavingFile = cerr.New(4501, "未能保存文件", "failed to save the uploaded file")
-	failedUploadToOss = cerr.New(4502, "上传OSS失败", "failed to upload to oss")
-	requiredFileErr = cerr.New(4503, "文件不能为空", "file cannot be empty")
+	failedInitFilePath    = cerr.New(4500, "初始化路径失败", "failed to initialize upload path")
+	failedSavingFile      = cerr.New(4501, "未能保存文件", "failed to save the uploaded file")
+	failedUploadToOss     = cerr.New(4502, "上传OSS失败", "failed to upload to oss")
+	requiredFileErr       = cerr.New(4503, "文件不能为空", "file cannot be empty")
 	failedDownloadFromOss = cerr.New(4504, "OSS下载失败", "failed to download from oss")
-	failedUploadingfile = cerr.New(4505, "未能上传文件", "failed to upload")
+	failedUploadingfile   = cerr.New(4505, "未能上传文件", "failed to upload")
 )
 
 type FileResponse struct {
 	Path     string `json:"path"`
 	FullPath string `json:"full_path"`
 	Name     string `json:"name"`
-	Size	 int64  `json:"size"`
+	Size     int64  `json:"size"`
 }
 
 type File struct {
@@ -55,6 +55,7 @@ type File struct {
 // @Success 200 {string} string	"{"code": -1, "message": "添加失败"}"
 // @Router /api/v1/public/uploadFile [post]
 // @Security Bearer
+
 func (e File) UploadFile(c *gin.Context) {
 	e.MakeContext(c)
 
@@ -100,11 +101,12 @@ func (e File) UploadFile(c *gin.Context) {
 // @Success 200 {object} response.Response "{"code": 200, "data": [...]}"
 // @Router /public/downloadFile/{pathname}/{filename} [get]
 // @Security Bearer
+
 func (e File) DownloadFile(c *gin.Context) {
 	var req struct {
 		Pathname string `uri:"pathname"`
 		Filename string `uri:"filename"`
-		As string `form:"as"`
+		As       string `form:"as"`
 	}
 	err := e.MakeContext(c).
 		Bind(&req, nil, binding.Query).
@@ -177,7 +179,7 @@ func (e File) baseImg(c *gin.Context) (*FileResponse, error) {
 	ddd, _ := base64.StdEncoding.DecodeString(file2list[1])
 
 	// get ext name from file2list[0]
-	filename := e.filename(category,"*.jpg")
+	filename := e.filename(category, "*.jpg")
 	err := e.saveFile(bytes.NewReader(ddd), filename)
 	if err != nil {
 		return nil, err
@@ -187,7 +189,7 @@ func (e File) baseImg(c *gin.Context) (*FileResponse, error) {
 		Path:     filename,
 		FullPath: urlPrefix + filename,
 		Name:     "",
-		Size: 	  int64(len(ddd)),
+		Size:     int64(len(ddd)),
 	}
 	return fileResponse, nil
 }
@@ -287,7 +289,7 @@ func (e File) ImportTempFile(c *gin.Context) (*FileResponse, error) {
 		Path:     filename,
 		FullPath: fullname,
 		Name:     file.Filename,
-		Size:	  file.Size,
+		Size:     file.Size,
 	}
 	return fileResponse, nil
 }
@@ -316,8 +318,7 @@ func (e File) singleFile(c *gin.Context) (*FileResponse, error) {
 		Path:     filename,
 		FullPath: urlPrefix + filename,
 		Name:     file.Filename,
-		Size:	  file.Size,
-
+		Size:     file.Size,
 	}
 	return fileResponse, nil
 }
