@@ -16,7 +16,6 @@ import (
 	"gorm.io/gorm"
 )
 
-
 func init() {
 	vd.SetErrorFactory(func(failPath, msg string) error {
 		return fmt.Errorf(`validation failed: %s %s`, failPath, msg)
@@ -82,7 +81,7 @@ func (e *Api) GetIdentity() *service.AuthIdentity {
 
 // Error 通常错误数据处理
 func (e Api) Error(err error) {
-	e.Logger.Errorf("API error: %v", err)
+	e.Logger.Errorf("ApiError: %v", err)
 	response.Error(e.Context, err)
 }
 

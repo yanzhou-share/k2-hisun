@@ -53,6 +53,7 @@ func PayloadFunc(data interface{}) jwt.MapClaims {
 // @Param account body Login  true "account"
 // @Success 200 {string} string "{"code": 200, "expire": "2019-08-07T12:45:48+08:00", "token": ".eyJleHAiOjE1NjUxNTMxNDgsImlkIjoiYWRtaW4iLCJvcmlnX2lhdCI6MTU2NTE0OTU0OH0.-zvzHvbg0A" }"
 // @Router /api/v1/login [post]
+
 func Authenticator(c *gin.Context) (interface{}, error) {
 	log := api.MustGetLogger(c)
 	db := api.MustGetOrm(c)

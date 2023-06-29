@@ -10,13 +10,13 @@ import (
 
 type PresignTokenRequest struct {
 	Directory string `json:"directory"`
-	Filename string `json:"filename"`
-	Duration int `json:"duration"`
+	Filename  string `json:"filename"`
+	Duration  int    `json:"duration"`
 }
 
 type PresignTokenResponse struct {
-	Vendor string `json:"vendor"`
-	Token interface{} `json:"token"`
+	Vendor string      `json:"vendor"`
+	Token  interface{} `json:"token"`
 }
 
 type PresignToken struct {
@@ -32,6 +32,7 @@ type PresignToken struct {
 // @Success 200 {object} PresignTokenResponse "{"code": 200, "data": [...]}"
 // @Router /presign-token [post]
 // @Security Bearer
+
 func (e PresignToken) PresignToken(c *gin.Context) {
 	var req PresignTokenRequest
 
@@ -58,9 +59,9 @@ func (e PresignToken) PresignToken(c *gin.Context) {
 	//c.Header("Access-Control-Allow-Methods", "POST")
 	//c.Header("Access-Control-Allow-Origin", "*")
 
-	response := PresignTokenResponse {
+	response := PresignTokenResponse{
 		Vendor: oss.Name(),
-		Token: token,
+		Token:  token,
 	}
 	e.OK(response, "成功")
 }

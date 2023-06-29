@@ -13,6 +13,7 @@ import (
 // @Tags 登陆
 // @Success 200 {object} response.Response{data=string,id=string,msg=string} "{"code": 200, "data": [...]}"
 // @Router /api/v1/captcha [get]
+
 func GenerateCaptchaHandler(c *gin.Context) {
 	id, b64s, err := captcha.DriverDigitFunc()
 	if err != nil {
