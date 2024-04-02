@@ -57,6 +57,8 @@ require (
 	gorm.io/driver/sqlite v1.1.5-0.20201206014648-c84401fbe3ba
 	gorm.io/gorm v1.21.11
 	gorm.io/plugin/dbresolver v1.1.0
+	go.uber.org/zap/zapcore v1.27.0
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 )
 
 //replace (
