@@ -30,7 +30,7 @@ type bizError struct {
 func New(code int, cnMsg string, enMsg string) *bizError {
 	return &bizError{
 		messages: map[string]string{
-			"__default__": enMsg,
+			"__default__": cnMsg,
 			"zh-cn": cnMsg,
 			"en": enMsg,
 		},
